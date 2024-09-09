@@ -1,62 +1,65 @@
 <script setup>
-import { ref, computed } from 'vue'
-import socksBlueImage from '../assets/socks_blue.jpg'
-import socksGreenImage from '../assets/socks_green.jpg'
+import { ref, computed } from "vue";
+import socksBlueImage from "../assets/socks_blue.jpg";
+import socksGreenImage from "../assets/socks_green.jpg";
 
 const props = defineProps({
   premium: {
     type: Boolean,
-    required: true
-  }
-})
+    required: true,
+  },
+});
 
-const emit = defineEmits(['add-to-cart'])
+const emit = defineEmits(["add-to-cart"]);
 
-const product = ref('Socks')
-const brand = ref('Vue Mastery')
-const selectedVariant = ref(0)
-const details = ref(['50% cotton', '30% wool', '20% polyester'])
+const product = ref("Socks");
+const brand = ref("Vue Mastery");
+const selectedVariant = ref(0);
+const details = ref(["50% cotton", "30% wool", "20% polyester"]);
 
 const variants = ref([
-  { id: 2234, color: 'green', image: socksGreenImage, quantity: 50 },
-  { id: 2235, color: 'blue', image: socksBlueImage, quantity: 0 },
-])
-    
+  { id: 2234, color: "green", image: socksGreenImage, quantity: 50 },
+  { id: 2235, color: "blue", image: socksBlueImage, quantity: 0 },
+]);
+
 const title = computed(() => {
-  return brand.value + ' ' + product.value
-})
+  return brand.value + " " + product.value;
+});
 
 const image = computed(() => {
-  return variants.value[selectedVariant.value].image
-})
+  return variants.value[selectedVariant.value].image;
+});
 
 const inStock = computed(() => {
-  return variants.value[selectedVariant.value].quantity > 0
-})
+  return variants.value[selectedVariant.value].quantity > 0;
+});
 
 const shipping = computed(() => {
   if (props.premium) {
-    return 'Free'
+    return "Free";
   }
-  return 2.99
-})
+  return 2.99;
+});
 
 function addToCart() {
-  emit('add-to-cart', variants.value[selectedVariant.value].id)
+  emit("add-to-cart", variants.value[selectedVariant.value].id);
 }
 
 function updateVariant(index) {
-  selectedVariant.value = index
+  selectedVariant.value = index;
 }
 </script>
 
 <template>
-  <div class="product-display">
-    <div class="product-container">
-      <div class="product-image">
-        <img v-bind:src="image">
+  <div class="p-4">
+    <div class="flex flex-row flex-wrap">
+      <div class="w-[100%] md:w-[50%]">
+        <img
+          v-bind:src="image"
+          class="w-[70%] m-10 p-4 border-2 border-=#d8d8d8"
+        />
       </div>
-      <div class="product-info">
+      <div class="w-[100%] ml-[10px] md:w-[50%] md:ml-0">
         <h1>{{ title }}</h1>
         <p v-if="inStock">In Stock</p>
         <p v-else>Out of Stock</p>
@@ -64,19 +67,18 @@ function updateVariant(index) {
         <ul>
           <li v-for="detail in details">{{ detail }}</li>
         </ul>
-        <div 
-          v-for="(variant, index) in variants" 
-          class="color-circle" 
+        <div
+          v-for="(variant, index) in variants"
+          class="color-circle"
           :style="{ backgroundColor: variant.color }"
-          :key="variant.id" 
-          @mouseover="updateVariant(index)" 
-        >
-        </div>
-        
-        <button 
-          class="button" 
-          :class="{ disabled: !inStock }" 
-          :disabled="!inStock" 
+          :key="variant.id"
+          @mouseover="updateVariant(index)"
+        ></div>
+
+        <button
+          class="button"
+          :class="{ disabled: !inStock }"
+          :disabled="!inStock"
           @click="addToCart"
         >
           Add to Cart
@@ -87,8 +89,7 @@ function updateVariant(index) {
 </template>
 
 <style scoped>
-
-.product-display {
+/* .product-display {
   padding: 16px;
 }
 
@@ -113,7 +114,7 @@ img {
   width: 100%;
   margin-left: 10px;
 }
-
+ */
 .color-circle {
   width: 50px;
   height: 50px;
@@ -134,7 +135,7 @@ img {
   box-shadow: inset 0 -0.6em 1em -0.35em rgba(0, 0, 0, 0.17),
     inset 0 0.6em 2em -0.3em rgba(255, 255, 255, 0.15),
     inset 0 0 0em 0.05em rgba(255, 255, 255, 0.12);
-  
+
   background-color: #39495c;
   cursor: pointer;
 }
@@ -144,8 +145,7 @@ img {
   cursor: not-allowed;
 }
 
-@media only screen and (min-width: 860px) {
-
+/* @media only screen and (min-width: 860px) {
   .product-image {
     width: 50%;
   }
@@ -154,5 +154,5 @@ img {
     width: 50%;
     margin-left: 0;
   }
-} 
+} */
 </style>
