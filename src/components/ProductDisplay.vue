@@ -54,10 +54,7 @@ function updateVariant(index) {
   <div class="p-4">
     <div class="flex flex-row flex-wrap">
       <div class="w-[100%] md:w-[50%]">
-        <img
-          v-bind:src="image"
-          class="w-[70%] m-10 p-4 border-2 border-=#d8d8d8"
-        />
+        <img v-bind:src="image" class="w-[70%] m-10 p-4 border-2 border-mist" />
       </div>
       <div class="w-[100%] ml-[10px] md:w-[50%] md:ml-0">
         <h1>{{ title }}</h1>
@@ -69,15 +66,15 @@ function updateVariant(index) {
         </ul>
         <div
           v-for="(variant, index) in variants"
-          class="w-12 h-12 mt-2 border-solid border-2 border-[#d8d8d8] rounded-[50%]"
+          class="w-12 h-12 mt-2 border-solid border-2 border-mist rounded-[50%]"
           :class="{ green: 'bg-[green]', blue: 'bg-[blue]' }[variant.color]"
           :key="variant.id"
           @mouseover="updateVariant(index)"
         ></div>
 
         <button
-          class="w-40 h-15 m-8 p-5 rounded-[5px] bg-[#39495c] text-white text-center text-lg leading-none cursor-pointer btn-shading-bn"
-          :class="inStock ? [] : ['bg-[#d8d8d8]', 'cursor-not-allowed']"
+          class="w-40 h-15 m-8 p-5 rounded-[5px] bg-midnight text-white text-center text-lg leading-none cursor-pointer btn-shading-bn"
+          :class="inStock ? [] : ['bg-mist', 'cursor-not-allowed']"
           :disabled="!inStock"
           @click="addToCart"
         >

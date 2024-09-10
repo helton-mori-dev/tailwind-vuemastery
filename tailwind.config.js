@@ -2,7 +2,19 @@
 module.exports = {
   content: ["./src/**/*.vue", "index.html"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        ocean: "#16c8b0",
+        leaf: "#84cf6a",
+        mist: "#d8d8d8",
+        midnight: "#39495c",
+      },
+    },
+    screens: {
+      sm: "660px",
+      md: "860px",
+      lg: "7060px",
+    },
   },
   plugins: [],
 };
