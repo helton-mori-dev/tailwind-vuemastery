@@ -13,9 +13,7 @@ function updateCart(id) {
 <template>
   <div class="h-16 mb-6 bg-gradient-to-r from-teal-500 to-leaf"></div>
 
-  <div
-    class="my-[25px] mx-[100px] p-[30px] border border-solid border-mist bg-white float-right"
-  >
+  <div class="my-[25px] mx-[100px] p-[30px] mist-border-1 bg-white float-right">
     Cart({{ cart.length }})
   </div>
   <product-display
