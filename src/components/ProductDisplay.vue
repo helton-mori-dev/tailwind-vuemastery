@@ -2,6 +2,8 @@
 import { ref, computed } from "vue";
 import socksBlueImage from "../assets/socks_blue.jpg";
 import socksGreenImage from "../assets/socks_green.jpg";
+import PrettyButton from "./PrettyButton.vue";
+import ResponsiveWidth from "./ResponsiveWidth.vue";
 
 const props = defineProps({
   premium: {
@@ -53,34 +55,31 @@ function updateVariant(index) {
 <template>
   <div class="p-4">
     <div class="flex flex-row flex-wrap">
-      <div class="w-[100%] md:w-[50%]">
+      <ResponsiveWidth>
         <img v-bind:src="image" class="w-[70%] m-10 p-4 mist-border-2" />
-      </div>
-      <div class="w-[100%] ml-[10px] md:w-[50%] md:ml-0">
-        <h1>{{ title }}</h1>
-        <p v-if="inStock">In Stock</p>
-        <p v-else>Out of Stock</p>
-        <p>Shipping: {{ shipping }}</p>
-        <ul>
-          <li v-for="detail in details">{{ detail }}</li>
-        </ul>
-        <div
-          v-for="(variant, index) in variants"
-          class="w-12 h-12 mt-2 border-solid mist-border-2 rounded-[50%]"
-          :class="{ green: 'bg-[green]', blue: 'bg-[blue]' }[variant.color]"
-          :key="variant.id"
-          @mouseover="updateVariant(index)"
-        ></div>
+      </ResponsiveWidth>
+      <ResponsiveWidth>
+        <div class="ml-3 md:ml-0">
+          <h1>{{ title }}</h1>
+          <p v-if="inStock">In Stock</p>
+          <p v-else>Out of Stock</p>
+          <p>Shipping: {{ shipping }}</p>
+          <ul>
+            <li v-for="detail in details">{{ detail }}</li>
+          </ul>
+          <div
+            v-for="(variant, index) in variants"
+            class="w-12 h-12 mt-2 border-solid mist-border-2 rounded-[50%]"
+            :class="{ green: 'bg-[green]', blue: 'bg-[blue]' }[variant.color]"
+            :key="variant.id"
+            @mouseover="updateVariant(index)"
+          ></div>
 
-        <button
-          class="w-40 h-15 m-8 p-5 rounded-[5px] bg-midnight text-white text-center text-lg leading-none cursor-pointer btn-shading-bn"
-          :class="inStock ? [] : ['bg-mist', 'cursor-not-allowed']"
-          :disabled="!inStock"
-          @click="addToCart"
-        >
-          Add to Cart
-        </button>
-      </div>
+          <PrettyButton :isActive="inStock" @click="addToCart">
+            Add to cart</PrettyButton
+          >
+        </div>
+      </ResponsiveWidth>
     </div>
   </div>
 </template>
